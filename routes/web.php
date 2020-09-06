@@ -21,6 +21,13 @@ Route::get('/test', function () {
     return view('test');
 });
 
+Route::get('/return', function () {
+    $name = request('name');
+    return view('return', [
+        'name' => $name
+    ]);
+});
+
 // Route::get('/welcome    ', function () {
 //     return ['foo' => 'bar'] ;
 // });
