@@ -82,7 +82,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     <H1>Posts</H1>
-                    <p> {{ $post->body ?? ''}} </p>
+                    <p> {{ $post->body }} </p>
                 </div>
 
                 {{-- <div class="links">

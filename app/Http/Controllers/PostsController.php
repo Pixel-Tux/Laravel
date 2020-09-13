@@ -9,7 +9,9 @@ class PostsController extends Controller
     public function show($slug){
 
         $post = \DB::table('posts')->where('slug', $slug)->first();
-
+        if (!$post){
+            abort(404);
+        }
         //dd($post);
         // $posts = [
         //             'my-first-post' => 'Hello, this is my first blog post!',
