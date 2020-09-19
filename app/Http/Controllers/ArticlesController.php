@@ -44,7 +44,7 @@ class ArticlesController extends Controller
             // ])
         );
 
-        return redirect('/articles');
+        return redirect(route('articles.index'));
 
     }
     
@@ -68,7 +68,7 @@ class ArticlesController extends Controller
         // $article->body = request('body');
         // $article->save();
 
-        return redirect('/articles/'. $article->id);
+        return redirect( $article->path() );
     }
 
     // delete the risisorce

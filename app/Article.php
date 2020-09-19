@@ -8,4 +8,8 @@ class Article extends Model
 {
     // protected $fillable = ['title', 'excerpt', 'body'];
     protected $guarded = [];
+
+    public function path(){
+        return route('articles.show', $this);
+    }
 }
