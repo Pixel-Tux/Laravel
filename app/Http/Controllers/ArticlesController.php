@@ -30,6 +30,11 @@ class ArticlesController extends Controller
         // dump(request()->all());
         // validation
         // clean up
+        request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required'
+        ]);
 
         $article = new Article();
         $article->title = request('title');
@@ -50,6 +55,11 @@ class ArticlesController extends Controller
 
     // persist the edited rdsorce
     public function update($id) {
+        request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required'
+        ]);
         $article = Article::find($id);
         $article->title = request('title');
         $article->excerpt = request('excerpt');
