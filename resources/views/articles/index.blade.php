@@ -15,7 +15,7 @@
                 <p>
                     <img src="/images/banner.jpg" alt="" class="image image-full"> 
                 </p>
-                {{$article->body}}
+                {{$article->excerpt}}
             </div>
         @endforeach
 	</div>

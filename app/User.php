@@ -44,6 +44,9 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    public function article(){
+        return $this->hasMany(Article::class);
+    }
     // $user = User::finde(1); select * from user where id = 1;
     // $user->projects; select * from projects  where user_id = $user->id
     // $user->projects-> 
