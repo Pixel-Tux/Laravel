@@ -28,12 +28,13 @@ class ArticlesController extends Controller
     // persist the new resorce
     public function store() {
         // dump(request()->all());
-        $article = new Article();
+        // validation
+        // clean up
 
+        $article = new Article();
         $article->title = request('title');
         $article->excerpt = request('excerpt');
         $article->body = request('body');
-        
         $article->save();
 
         return redirect('/articles');
@@ -41,13 +42,21 @@ class ArticlesController extends Controller
     }
     
     // show a wiew to edit an existing resource
-    public function edit() {
-
+    public function edit($id) {
+        // finde the articles associated with the id
+        $article = Article::find($id);
+        return view('articles.edit', compact('article') );
     }
 
     // persist the edited rdsorce
-    public function update() {
+    public function update($id) {
+        $article = Article::find($id);
+        $article->title = request('title');
+        $article->excerpt = request('excerpt');
+        $article->body = request('body');
+        $article->save();
 
+        return redirect('/articles/'. $article->id);
     }
 
     // delete the risisorce
