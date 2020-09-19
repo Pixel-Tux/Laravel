@@ -30,17 +30,19 @@ class ArticlesController extends Controller
         // dump(request()->all());
         // validation
         // clean up
-        request()->validate([
-            'title' => 'required',
-            'excerpt' => 'required',
-            'body' => 'required'
-        ]);
+        // $validatedAtributs = request()->validate([
+        //     'title' => 'required',
+        //     'excerpt' => 'required',
+        //     'body' => 'required'
+        // ]);
 
-        $article = new Article();
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
-        $article->save();
+        Article::create($this->validateArticle()
+            // request()->validate([
+            // 'title' => 'required',
+            // 'excerpt' => 'required',
+            // 'body' => 'required'
+            // ])
+        );
 
         return redirect('/articles');
 
@@ -54,15 +56,17 @@ class ArticlesController extends Controller
 
     // persist the edited rdsorce
     public function update(Article $article) {
-        request()->validate([
-            'title' => 'required',
-            'excerpt' => 'required',
-            'body' => 'required'
-        ]);
-        $article->title = request('title');
-        $article->excerpt = request('excerpt');
-        $article->body = request('body');
-        $article->save();
+        $article->update( $this->validateArticle() 
+        //     request()->validate([
+        //     'title' => 'required',
+        //     'excerpt' => 'required',
+        //     'body' => 'required'
+        // ])
+        );
+        // $article->title = request('title');
+        // $article->excerpt = request('excerpt');
+        // $article->body = request('body');
+        // $article->save();
 
         return redirect('/articles/'. $article->id);
     }
@@ -70,6 +74,15 @@ class ArticlesController extends Controller
     // delete the risisorce
     public function destroy() {
 
+    }
+
+        //--------------------------------------------------------------
+    protected function validateArticle(){
+        return request()->validate([
+            'title' => 'required',
+            'excerpt' => 'required',
+            'body' => 'required'
+        ]);
     }
 
 
