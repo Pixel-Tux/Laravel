@@ -14,8 +14,8 @@ class ArticlesController extends Controller
     }
 
     // shows a single resorce
-    public function show($id) {
-        $article = Article::find($id);
+    public function show(Article $article) {
+        // $article = Article::findOrFail($id);
         return view('articles.show', ['article' => $article]);
     }
 
@@ -47,20 +47,18 @@ class ArticlesController extends Controller
     }
     
     // show a wiew to edit an existing resource
-    public function edit($id) {
+    public function edit(Article $article) {
         // finde the articles associated with the id
-        $article = Article::find($id);
         return view('articles.edit', compact('article') );
     }
 
     // persist the edited rdsorce
-    public function update($id) {
+    public function update(Article $article) {
         request()->validate([
             'title' => 'required',
             'excerpt' => 'required',
             'body' => 'required'
         ]);
-        $article = Article::find($id);
         $article->title = request('title');
         $article->excerpt = request('excerpt');
         $article->body = request('body');
