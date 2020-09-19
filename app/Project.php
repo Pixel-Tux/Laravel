@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-    //
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
+// hasOne
+// hasMany
+// belongsTo
+// belongsToMany
+// morphMany
+// morphToMany
