@@ -16,4 +16,11 @@ class Article extends Model
     public function author(){
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function tags() {
+        return $this->belongsToMany(Tag);
+    }
+
+    // an article has many tags
+    // tag belongs to an article
 }
