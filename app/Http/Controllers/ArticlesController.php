@@ -27,8 +27,10 @@ class ArticlesController extends Controller
 
     // shows a view to create a new resorce
     public function create() {
-        return view('articles.create');
-
+        // $tags = Tag::all();
+        return view('articles.create', [
+            'tags' => Tag::all()
+        ]); 
     }
 
     // persist the new resorce
@@ -41,14 +43,19 @@ class ArticlesController extends Controller
         //     'excerpt' => 'required',
         //     'body' => 'required'
         // ]);
+        $this->validateArticle();
+        $article = new Article(request(['title', 'excerpt', 'body']));
+        $article->user_id = 1;
+        $article->save();
+        $article->tags()->attach(request('tags'));
 
-        Article::create($this->validateArticle()
-            // request()->validate([
-            // 'title' => 'required',
-            // 'excerpt' => 'required',
-            // 'body' => 'required'
-            // ])
-        );
+        // Article::create($this->validateArticle()
+        //     // request()->validate([
+        //     // 'title' => 'required',
+        //     // 'excerpt' => 'required',
+        //     // 'body' => 'required'
+        //     // ])
+        // );
 
         return redirect(route('articles.index'));
 
@@ -87,7 +94,8 @@ class ArticlesController extends Controller
         return request()->validate([
             'title' => 'required',
             'excerpt' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'tags' => 'exists:tags,id'
         ]);
     }
 
